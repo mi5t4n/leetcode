@@ -5,31 +5,26 @@
  */
 var twoSum = function(nums, target) {
     
-    // Store the already numbers processed/seen.
-    var numbersAlreadySeen = [];
-    // Number of the nums.
-    var length = nums.length;
+    var numsMap = {}
+    nums.forEach(function(num, index){
+        numsMap[num] = index;
+    });
 
-    // Loop through each nubmer and process.
-    for(var index = 0; index < length; index++){
-        // If the numbers is already process, skip it.
-        if (numbersAlreadySeen.indexOf(nums[index]) >= 0) {
-            continue;
-        }
+    var result = [];
+    try {
+        nums.some(function(num, index){
+            var nextPair = target - num;
+            var nextPairIndex = numsMap[nextPair];
 
-        // Find the another pair.
-        var anotherPair = target - nums[index];
-        // Find the index of another pair.
-        var anotherPairIndex = nums.indexOf(anotherPair, index+1);
-        
-        // If another pair is found, return the index.
-        // Else store the numbers to already seen.
-        if ( anotherPairIndex >= 0) {
-            return [index, anotherPairIndex];
-        } else {
-            numbersAlreadySeen.push[nums[index]];
-        }
-     }
+            if (undefined !== nextPairIndex && index !== nextPairIndex ) {
+                result.push(index);
+                result.push(nextPairIndex);
+                throw BreakException;
+            }
+        });
+    } catch(e){}
+
+    return result;
 };
 
 var nums = [3,2,4];
